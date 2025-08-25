@@ -40,8 +40,8 @@ public class QuizServiceController {
 		return quizService.getAllQuizs();
 	}
 	
-	// API ªº¸ô®|: http://localhost:8080/quiz/get_questions?quizId=1
-	// ?«á­±ªº quizId ¥²¶·­n©M @RequestParam ¬A¸¹¤¤ªº¦r¦ê¤@¼Ë
+	// API çš„è·¯å¾‘: http://localhost:8080/quiz/get_questions?quizId=1
+	// ?å¾Œé¢çš„ quizId å¿…é ˆè¦å’Œ @RequestParam æ‹¬è™Ÿä¸­çš„å­—ä¸²ä¸€æ¨£
 	@PostMapping("quiz/get_questions")
 	public QuestionRes getQuizsByQuizId(@RequestParam("quizId") int quizId) {
 		return quizService.getQuizsByQuizId(quizId);
@@ -52,8 +52,8 @@ public class QuizServiceController {
 		return quizService.search(req);
 	}
 	
-	// API ªº¸ô®|: http://localhost:8080/quiz/get_questions?quizId=1
-	// ?«á­±ªº quizId ¥²¶·­n©M @RequestParam ¬A¸¹¤¤ªº¦r¦ê¤@¼Ë
+	// API çš„è·¯å¾‘: http://localhost:8080/quiz/get_questions?quizId=1
+	// ?å¾Œé¢çš„ quizId å¿…é ˆè¦å’Œ @RequestParam æ‹¬è™Ÿä¸­çš„å­—ä¸²ä¸€æ¨£
 	@PostMapping("quiz/delete")
 	public BasicRes delete(@RequestParam("quizId") int quizId) throws Exception {
 		return quizService.delete(quizId);
