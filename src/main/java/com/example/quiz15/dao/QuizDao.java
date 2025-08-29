@@ -55,4 +55,12 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
 	@Transactional
 	@Query(value = "delete from quiz where id = ?1", nativeQuery = true)
 	public void deleteById(int id);
+	
+	@Query(value = "select * from quiz where id = ?1", nativeQuery = true)
+	public Quiz getById(int id);
+	
+	// 判斷該問卷是否已發布以及當下的日期是否介於開始日期和結束日期之間
+	@Query(value = "select count(id) from quiz where id = ?1 and ?2 >= start_date " //
+			+ " and ?2 <= end_date and is_published is true", nativeQuery = true)
+	public int selectCountById(int id, LocalDate now);
 }
