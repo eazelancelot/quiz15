@@ -6,6 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Version;
 
 @Entity
 @Table(name = "quiz")
@@ -29,6 +30,10 @@ public class Quiz {
 
 	@Column(name = "is_published")
 	private boolean published;
+	
+	@Version
+	@Column(name = "version")
+	private int version;
 
 	public int getId() {
 		return id;
@@ -76,6 +81,14 @@ public class Quiz {
 
 	public void setPublished(boolean published) {
 		this.published = published;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
 	}
 
 }

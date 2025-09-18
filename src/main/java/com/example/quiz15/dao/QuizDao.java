@@ -41,6 +41,9 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
 	@Query(value = "select * from quiz", nativeQuery = true)
 	public List<Quiz> getAll();
 	
+	@Query(value = "select * from quiz where id in (?1)", nativeQuery = true)
+	public List<Quiz> getAllByIdIn(List<Integer> quizIdList);
+	
 	@Query(value = "select * from quiz where name like %?1% and start_date >= ?2" //
 			+ " and end_date <= ?3", nativeQuery = true)
 	public List<Quiz> getAll(String name, LocalDate startDate, LocalDate endDate);
@@ -56,6 +59,11 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
 	@Query(value = "delete from quiz where id = ?1", nativeQuery = true)
 	public void deleteById(int id);
 	
+	@Modifying
+	@Transactional
+	@Query(value = "delete from quiz where id in (?1)", nativeQuery = true)
+	public void deleteByIdIn(List<Integer> idList);
+	
 	@Query(value = "select * from quiz where id = ?1", nativeQuery = true)
 	public Quiz getById(int id);
 	
@@ -63,4 +71,6 @@ public interface QuizDao extends JpaRepository<Quiz, Integer> {
 	@Query(value = "select count(id) from quiz where id = ?1 and ?2 >= start_date " //
 			+ " and ?2 <= end_date and is_published is true", nativeQuery = true)
 	public int selectCountById(int id, LocalDate now);
+	
+	public List<Quiz> findByName(String name);
 }

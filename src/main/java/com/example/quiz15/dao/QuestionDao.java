@@ -28,6 +28,12 @@ public interface QuestionDao extends JpaRepository<Question, QuestionId> {
 			nativeQuery = true)
 	public void deleteByQuizId(int quizId);
 	
+	@Modifying
+	@Transactional
+	@Query(value = "delete from question where quiz_id in (?1)",
+			nativeQuery = true)
+	public void deleteByQuizIdIn(List<Integer> quizIdList);
+	
 	@Query(value = "select * from question where quiz_id = ?1",
 			nativeQuery = true)
 	public List<Question> getQuestionsByQuizId(int quizId);

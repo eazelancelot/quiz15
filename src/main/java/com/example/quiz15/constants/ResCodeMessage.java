@@ -20,7 +20,8 @@ public enum ResCodeMessage {
 	QUESTION_TYPE_IS_SINGLE(400, "Question Type is Single!!"),//
 	OPTION_ANSWER_MISMATCH(400, "Option Answer Mismatch!!"),//
 	EMAIL_DUPLICATED(400, "Email Duplicated!!"),//
-	OBJECTMAPPER_PROCESSING_ERROR(400, "ObjectMapper Processing Error!!");
+	OBJECTMAPPER_PROCESSING_ERROR(400, "ObjectMapper Processing Error!!"),//
+	PLEASE_LOGIN_FIRST(400, "Please Login First!!");
 
 	private int code;
 

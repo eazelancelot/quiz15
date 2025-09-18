@@ -9,16 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.quiz15.dao.FillinDao;
+import com.example.quiz15.dao.QuizDao;
+import com.example.quiz15.entity.Quiz;
 import com.example.quiz15.service.ifs.QuizService;
 import com.example.quiz15.vo.QuestionAnswerDto;
 import com.example.quiz15.vo.QuestionVo;
 import com.example.quiz15.vo.QuizCreateReq;
+import com.example.quiz15.vo.QuizUpdateReq;
 import com.example.quiz15.vo.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@SpringBootTest
+
+@SpringBootTest
 class Quiz15ApplicationTests {
 
 	@Autowired
@@ -26,6 +30,15 @@ class Quiz15ApplicationTests {
 
 	@Autowired
 	private FillinDao fillinDao;
+	
+	@Autowired
+	private QuizDao quizDao;
+	
+	@Test
+	public void findTest() {
+		List<Quiz> list = quizDao.findByName("早餐大調查");
+		System.out.println(list.size());
+	}
 
 	@Test
 	void contextLoads() {
@@ -110,6 +123,27 @@ class Quiz15ApplicationTests {
 		System.out.println("newSize: " + newSize);
 		System.out.println("count: " + (size - newSize));
 		
+	}
+	
+	@Test
+	public void quizUpdateTest() {
+		QuestionVo vo1 = new QuestionVo(1, "早餐吃啥456", "Single", true, List.of("蛋餅", "漢堡", "三明治", "飯糰"));
+		QuizUpdateReq req = new QuizUpdateReq("早餐大調查", "早餐大調查", LocalDate.of(2025, 9, 1), LocalDate.of(2025, 10, 31),
+				true, List.of(vo1));
+		req.setQuizId(9);
+		try {
+			quizService.update(req);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void getQuizIdInTest() {
+		List<Integer> idList = new ArrayList<>(List.of(1, 2, 3, 4, 7, 8));
+		List<Quiz> list = quizDao.getAllByIdIn(idList);
+		System.out.println(list.size());
 	}
 
 }
